@@ -1,3 +1,9 @@
+# Force Content-Type for apple-app-site-association file
 <Files "apple-app-site-association">
     Header set Content-Type "application/json"
 </Files>
+
+# Alternative approach for .well-known directory
+<LocationMatch "/.well-known/apple-app-site-association">
+    Header set Content-Type "application/json"
+</LocationMatch>
