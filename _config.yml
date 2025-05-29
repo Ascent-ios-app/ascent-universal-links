@@ -1,3 +1,24 @@
+# Включаем скрытые файлы
 include:
   - .well-known
   - _headers
+
+# Настройки для GitHub Pages
+plugins:
+  - jekyll-sitemap
+
+# Исключаем файлы iOS проекта из сборки сайта
+exclude:
+  - "*.xcodeproj"
+  - "*.xcworkspace"
+  - "*.swift"
+  - "Podfile*"
+  - "README.md"
+  - ".gitignore"
+
+# Настройки для правильной обработки AASA файла
+defaults:
+  - scope:
+      path: ".well-known"
+    values:
+      layout: none
