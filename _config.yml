@@ -1,28 +1,12 @@
-# Включаем скрытые файлы
 include:
+  - apple-app-site-association
   - .well-known
 
-# Исключаем файлы iOS проекта
-exclude:
-  - "*.xcodeproj"
-  - "*.xcworkspace"
-  - "*.swift"
-  - "Podfile*"
-  - "*.md"
-  - "Pods/"
-
-# Настройки Jekyll
 plugins:
-  - jekyll-sitemap
+  - jekyll-optional-front-matter
 
-# Настройки для AASA файла
 defaults:
   - scope:
-      path: ".well-known/apple-app-site-association"
+      path: "apple-app-site-association"
     values:
-      layout: null
-      content_type: "application/json"
-
-# Отключаем обработку для .well-known
-keep_files:
-  - .well-known
+      content-type: "application/json"
