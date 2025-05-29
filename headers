@@ -1,0 +1,8 @@
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+  X-Content-Type-Options: nosniff
+  Access-Control-Allow-Origin: *
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
