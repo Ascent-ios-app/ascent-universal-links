@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Create site directory
+        run: |
+          mkdir -p _site
+          
+      - name: Copy files
+        run: |
+          # Копируем HTML файлы
+          find . -name "*.html" -not -path "./.git/*" -not -path "./_site/*" -exec cp {} _site/ \;
+          
+          # Копируем .well-known с правильными заголовками
+          mkdir -p _site/.well-known
+          cp .well-known/apple-app-site-association _site/.well-known/
+          
+      - name: Create _headers file for Netlify-style headers
+        run: |
+          cat > _site/_headers << 'EOF'
+          /.well-known/apple-app-site-association
+            Content-Type: application/json
+            X-Content-Type-Options: nosniff
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
