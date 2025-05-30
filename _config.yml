@@ -1,12 +1,5 @@
-include:
-  - apple-app-site-association
-  - .well-known
-
 plugins:
-  - jekyll-optional-front-matter
-
-defaults:
-  - scope:
-      path: "apple-app-site-association"
-    values:
-      content-type: "application/json"
+  - jekyll-redirect-from
+mime_types:
+  .well-known/apple-app-site-association: application/json
+      
