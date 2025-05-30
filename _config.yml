@@ -3,6 +3,9 @@ include:
   - .well-known
   - _headers
 
+mime_types:
+  .well-known/apple-app-site-association: application/json
+
 # Настройки для GitHub Pages
 plugins:
   - jekyll-sitemap
